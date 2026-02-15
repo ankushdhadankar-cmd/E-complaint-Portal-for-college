@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - College E-Complaint System</title>
+    <link rel="stylesheet" href="login-styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>📋 College E-Complaint System</h1>
+                <p>Student Login Portal</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="your.email@college.edu"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+
+            <div id="errorMessage" class="alert alert-error" style="display: none;">
+                ✗ <span id="errorText"></span>
+            </div>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="#signup" onclick="showSignup()">Sign up here</a></p>
+                <p><a href="#forgot" onclick="showForgotPassword()">Forgot password?</a></p>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <div class="demo-section">
+                <p><strong>Demo Login Credentials:</strong></p>
+                <p>Email: <code>student@college.edu</code></p>
+                <p>Password: <code>password123</code></p>
+                <p style="font-size: 0.9rem; color: #6b7280;">Use these to test the system</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal (Hidden by default) -->
+    <div id="signupModal" class="modal" style="display: none;">
+        <div class="modal-content signup-box">
+            <span class="close" onclick="closeSignup()">&times;</span>
+            <h2>Create New Account</h2>
+            <form id="signupForm" class="login-form">
+                <div class="form-group">
+                    <label for="signupName">Full Name *</label>
+                    <input 
+                        type="text" 
+                        id="signupName" 
+                        name="name" 
+                        placeholder="Your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email Address *</label>
+                    <input 
+                        type="email" 
+                        id="signupEmail" 
+                        name="email" 
+                        placeholder="your.email@college.edu"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signupRoll">Roll Number *</label>
+                    <input 
+                        type="text" 
+                        id="signupRoll" 
+                        name="rollNumber" 
+                        placeholder="e.g., 2021CSE001"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password *</label>
+                    <input 
+                        type="password" 
+                        id="signupPassword" 
+                        name="password" 
+                        placeholder="At least 6 characters"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password *</label>
+                    <input 
+                        type="password" 
+                        id="signupConfirmPassword" 
+                        name="confirmPassword" 
+                        placeholder="Confirm password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Create Account</button>
+            </form>
+
+            <div id="signupError" class="alert alert-error" style="display: none;">
+                ✗ <span id="signupErrorText"></span>
+            </div>
+
+            <div id="signupSuccess" class="alert alert-success" style="display: none;">
+                ✓ Account created successfully! Please login.
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal (Hidden by default) -->
+    <div id="forgotModal" class="modal" style="display: none;">
+        <div class="modal-content forgot-box">
+            <span class="close" onclick="closeForgot()">&times;</span>
+            <h2>Reset Password</h2>
+            <form id="forgotForm" class="login-form">
+                <div class="form-group">
+                    <label for="forgotEmail">Enter your email address *</label>
+                    <input 
+                        type="email" 
+                        id="forgotEmail" 
+                        name="email" 
+                        placeholder="your.email@college.edu"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Send Reset Link</button>
+            </form>
+
+            <div id="forgotSuccess" class="alert alert-success" style="display: none;">
+                ✓ Password reset link sent to your email!
+            </div>
+
+            <div id="forgotError" class="alert alert-error" style="display: none;">
+                ✗ <span id="forgotErrorText"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>
