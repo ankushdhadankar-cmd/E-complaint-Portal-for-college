@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://font.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <h2>E-Complaint for College</h2>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<h2 class="dashboard-title">Student's Dashboard</h2>
+
+<div class="dashboard-wrapper">
+
+    <!-- FILE COMPLAINT CARD -->
+    <div class="card">
+        <h3>📩 File a Complaint</h3>
+
+        <select id="category">
+            <option value="">Select Category</option>
+            <option>Infrastructure and Facilities</option>
+            <option>Staff Behaviour</option>
+            <option>Teaching Quality</option>
+            <option>Harassment and Abusing</option>
+            <option>Other</option>
+        </select>
+
+        <textarea id="complaintText" placeholder="Describe your complaint..."></textarea>
+
+        <button onclick="submitComplaint()">Submit Complaint</button>
+    </div>
+
+    <!-- YOUR COMPLAINTS CARD -->
+    <div class="card">
+        <h3>📋 Your Complaints</h3>
+        <div id="complaintList"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

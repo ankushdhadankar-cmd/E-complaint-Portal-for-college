@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #ae0ffa, #8100b4);
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.header h2 {
+    margin: 0;
+}
+
+/* Auth Box */
+.auth-container {
+    width: 350px;
+    margin: 100px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Dashboard */
+.dashboard-container {
+    width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    height: 90px;
+}
+
+button {
+    background: #ae00ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #541e80;
+    transform: translateY(-3px);
+}
+span {
+    color: #2a5298;
+    cursor: pointer;
+}
+
+.complaint-card {
+    background: #f4f4f4;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+/* Dashboard Layout */
+.dashboard-wrapper {
+    width: 85%;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* Card Section */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+/* Hover Animation */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* Complaint Cards Inside */
+.complaint-card {
+    background: #f4f6f9;
+    padding: 15px;
+    margin-top: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.complaint-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+/* Admin Layout */
+.admin-wrapper {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.admin-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Admin Complaint Card */
+.admin-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.admin-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+/* Dashboard Title */
+.dashboard-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 30px 0;
+    color: antiquewhite;
+    text-shadow:0px 5px 15px rgba(0,0,0,0.4);
+}
