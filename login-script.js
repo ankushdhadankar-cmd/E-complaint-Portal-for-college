@@ -1,23 +1,24 @@
-function studentLogin() {
-    const username = prompt("Enter Student Username:");
-    const password = prompt("Enter Student Password:");
-
-    if (username && password) {
-        localStorage.setItem("role", "student");
-        window.location.href = "student.html";
-    } else {
-        alert("Invalid Student Login");
-    }
+// Restrict access
+if (localStorage.getItem("role") !== "student") {
+    alert("Access Denied");
+    window.location.href = "login.html";
 }
 
-function adminLogin() {
-    const username = prompt("Enter Admin Username:");
-    const password = prompt("Enter Admin Password:");
+function submitComplaint() {
+    const name = document.getElementById("name").value;
+    const complaint = document.getElementById("complaint").value;
 
-    if (username === "admin" && password === "1234") {
-        localStorage.setItem("role", "admin");
-        window.location.href = "admin-dashboard.html";
-    } else {
-        alert("Invalid Admin Credentials");
-    }
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    const newComplaint = {
+        id: Date.now(),
+        name: name,
+        complaint: complaint,
+        status: "Pending"
+    };
+
+    complaints.push(newComplaint);
+    localStorage.setItem("complaints", JSON.stringify(complaints));
+
+    alert("Complaint Submitted Successfully");
 }
