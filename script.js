@@ -1,5 +1,37 @@
-// Initialize the page
+// ==================== LOGIN CHECK ====================
+// Check if user is logged in FIRST
+function checkUserLogin() {
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (!currentUser) {
+        // Not logged in, redirect to login page
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // User is logged in, show greeting
+    const user = JSON.parse(currentUser);
+    const greeting = document.getElementById('userGreeting');
+    if (greeting) {
+        greeting.textContent = `Welcome, ${user.name}!`;
+    }
+}
+
+function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+        // Clear user data
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('rememberMe');
+        
+        // Redirect to login page
+        window.location.href = 'login.html';
+    }
+}
+
+// ==================== PAGE INITIALIZATION ====================
+// Initialize the page - CHECK LOGIN FIRST!
 document.addEventListener('DOMContentLoaded', function() {
+    checkUserLogin();  // THIS MUST BE FIRST!
     setupNavigation();
     setupComplaintForm();
     updateStatistics();
@@ -8,12 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Empty database - no sample data
 let complaintsDatabase = [];
 
-// Navigation functionality
+// ==================== NAVIGATION ====================
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            // Don't prevent default for logout link
+            if (this.getAttribute('href') === '#logout') {
+                return;
+            }
+            
             e.preventDefault();
             
             // Remove active class from all links
@@ -36,9 +73,11 @@ function scrollToSection(sectionId) {
     }
 }
 
-// Complaint form setup
+// ==================== COMPLAINT FORM ====================
 function setupComplaintForm() {
     const form = document.getElementById('complaintForm');
+    
+    if (!form) return;
     
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -80,6 +119,9 @@ function setupComplaintForm() {
         
         // Update statistics
         updateStatistics();
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
 
@@ -99,6 +141,8 @@ function showSuccessMessage(referenceId) {
     const successDiv = document.getElementById('successMessage');
     const refIdSpan = document.getElementById('referenceId');
     
+    if (!successDiv || !refIdSpan) return;
+    
     refIdSpan.textContent = referenceId;
     successDiv.style.display = 'block';
     
@@ -108,7 +152,7 @@ function showSuccessMessage(referenceId) {
     }, 5000);
 }
 
-// Track complaint functionality
+// ==================== TRACK COMPLAINT ====================
 function trackComplaint() {
     const referenceNumber = document.getElementById('referenceNumber').value.trim().toUpperCase();
     
@@ -129,46 +173,64 @@ function trackComplaint() {
 
 function displayComplaintDetails(complaint) {
     // Hide not found message
-    document.getElementById('notFoundMessage').style.display = 'none';
+    const notFoundDiv = document.getElementById('notFoundMessage');
+    if (notFoundDiv) {
+        notFoundDiv.style.display = 'none';
+    }
     
     // Show complaint details
     const detailsDiv = document.getElementById('complaintDetails');
+    if (!detailsDiv) return;
     
     // Fill in details
-    document.getElementById('detailRefId').textContent = complaint.id;
-    document.getElementById('detailStatus').innerHTML = getStatusBadge(complaint.status);
-    document.getElementById('detailCategory').textContent = getCategoryLabel(complaint.category);
-    document.getElementById('detailPriority').innerHTML = getPriorityBadge(complaint.priority);
-    document.getElementById('detailDate').textContent = formatDate(complaint.submittedDate);
-    document.getElementById('detailUpdated').textContent = formatDate(complaint.lastUpdated);
-    document.getElementById('detailResolution').textContent = complaint.resolutionDate ? 
+    const detailRefId = document.getElementById('detailRefId');
+    const detailStatus = document.getElementById('detailStatus');
+    const detailCategory = document.getElementById('detailCategory');
+    const detailPriority = document.getElementById('detailPriority');
+    const detailDate = document.getElementById('detailDate');
+    const detailUpdated = document.getElementById('detailUpdated');
+    const detailResolution = document.getElementById('detailResolution');
+    
+    if (detailRefId) detailRefId.textContent = complaint.id;
+    if (detailStatus) detailStatus.innerHTML = getStatusBadge(complaint.status);
+    if (detailCategory) detailCategory.textContent = getCategoryLabel(complaint.category);
+    if (detailPriority) detailPriority.innerHTML = getPriorityBadge(complaint.priority);
+    if (detailDate) detailDate.textContent = formatDate(complaint.submittedDate);
+    if (detailUpdated) detailUpdated.textContent = formatDate(complaint.lastUpdated);
+    if (detailResolution) detailResolution.textContent = complaint.resolutionDate ? 
         formatDate(complaint.resolutionDate) : 'Not yet resolved';
     
     // Build timeline
     const timelineDiv = document.getElementById('statusTimeline');
-    timelineDiv.innerHTML = '';
-    
-    complaint.timeline.forEach(item => {
-        const timelineItem = document.createElement('div');
-        timelineItem.className = 'timeline-item';
-        timelineItem.innerHTML = `
-            <div class="timeline-content">
-                <div class="timeline-date">${formatDate(item.date)}</div>
-                <div class="timeline-status">${getStatusLabel(item.status)}</div>
-                <div class="timeline-description">${item.description}</div>
-            </div>
-        `;
-        timelineDiv.appendChild(timelineItem);
-    });
+    if (timelineDiv) {
+        timelineDiv.innerHTML = '';
+        
+        complaint.timeline.forEach(item => {
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            timelineItem.innerHTML = `
+                <div class="timeline-content">
+                    <div class="timeline-date">${formatDate(item.date)}</div>
+                    <div class="timeline-status">${getStatusLabel(item.status)}</div>
+                    <div class="timeline-description">${item.description}</div>
+                </div>
+            `;
+            timelineDiv.appendChild(timelineItem);
+        });
+    }
     
     detailsDiv.style.display = 'block';
 }
 
 function showNotFoundMessage() {
-    document.getElementById('complaintDetails').style.display = 'none';
-    document.getElementById('notFoundMessage').style.display = 'block';
+    const detailsDiv = document.getElementById('complaintDetails');
+    const notFoundDiv = document.getElementById('notFoundMessage');
+    
+    if (detailsDiv) detailsDiv.style.display = 'none';
+    if (notFoundDiv) notFoundDiv.style.display = 'block';
 }
 
+// ==================== STATUS AND PRIORITY BADGES ====================
 function getStatusBadge(status) {
     const statusColors = {
         'submitted': '<span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.9rem;">Submitted</span>',
@@ -221,24 +283,29 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', options);
 }
 
-// Update statistics
+// ==================== STATISTICS ====================
 function updateStatistics() {
     const total = complaintsDatabase.length;
     const resolved = complaintsDatabase.filter(c => c.status === 'resolved').length;
     const pending = complaintsDatabase.filter(c => c.status !== 'resolved' && c.status !== 'closed').length;
     const resolutionRate = total > 0 ? Math.round((resolved / total) * 100) : 0;
     
-    document.getElementById('totalComplaints').textContent = total;
-    document.getElementById('resolvedComplaints').textContent = resolved;
-    document.getElementById('pendingComplaints').textContent = pending;
-    document.getElementById('resolutionRate').textContent = resolutionRate + '%';
+    const totalComplaints = document.getElementById('totalComplaints');
+    const resolvedComplaints = document.getElementById('resolvedComplaints');
+    const pendingComplaints = document.getElementById('pendingComplaints');
+    const resolutionRateElement = document.getElementById('resolutionRate');
+    
+    if (totalComplaints) totalComplaints.textContent = total;
+    if (resolvedComplaints) resolvedComplaints.textContent = resolved;
+    if (pendingComplaints) pendingComplaints.textContent = pending;
+    if (resolutionRateElement) resolutionRateElement.textContent = resolutionRate + '%';
 }
 
-// Smooth scrolling for anchor links
+// ==================== SMOOTH SCROLLING ====================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        if (href !== '#') {
+        if (href !== '#' && href !== '#logout') {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
