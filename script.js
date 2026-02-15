@@ -1,50 +1,12 @@
-// Sample data storage (in a real application, this would be a backend database)
-let complaintsDatabase = [
-    {
-        id: 'COMP-2026-001',
-        name: 'John Doe',
-        email: 'john@college.edu',
-        rollNumber: '2021CSE001',
-        category: 'academic',
-        priority: 'high',
-        description: 'Course material not provided on time',
-        status: 'resolved',
-        submittedDate: '2026-01-15',
-        lastUpdated: '2026-02-10',
-        resolutionDate: '2026-02-10',
-        timeline: [
-            { date: '2026-01-15', status: 'submitted', description: 'Complaint submitted' },
-            { date: '2026-01-20', status: 'acknowledged', description: 'Complaint acknowledged by department' },
-            { date: '2026-02-05', status: 'in_progress', description: 'Investigation in progress' },
-            { date: '2026-02-10', status: 'resolved', description: 'Resolved - Course materials provided' }
-        ]
-    },
-    {
-        id: 'COMP-2026-002',
-        name: 'Jane Smith',
-        email: 'jane@college.edu',
-        rollNumber: '2022ECE045',
-        category: 'infrastructure',
-        priority: 'medium',
-        description: 'Lab equipment not functioning properly',
-        status: 'in_progress',
-        submittedDate: '2026-02-01',
-        lastUpdated: '2026-02-12',
-        resolutionDate: null,
-        timeline: [
-            { date: '2026-02-01', status: 'submitted', description: 'Complaint submitted' },
-            { date: '2026-02-03', status: 'acknowledged', description: 'Lab team assigned' },
-            { date: '2026-02-12', status: 'in_progress', description: 'Equipment repair in progress' }
-        ]
-    }
-];
-
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
     setupComplaintForm();
     updateStatistics();
 });
+
+// Empty database - no sample data
+let complaintsDatabase = [];
 
 // Navigation functionality
 function setupNavigation() {
