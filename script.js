@@ -1,5 +1,6 @@
 // Sample data storage (in a real application, this would be a backend database)
-let complaintsDatabase = [];
+let complaintsDatabase = [
+];
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
@@ -247,3 +248,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 
 });
+
