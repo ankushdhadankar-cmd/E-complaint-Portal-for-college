@@ -1,12 +1,12 @@
-// Sample data storage (in a real application, this would be a backend database)
-let complaintsDatabase = [
-];
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
     setupComplaintForm();
     updateStatistics();
 });
+
+// Empty database - no sample data
+let complaintsDatabase = [];
 
 // Navigation functionality
 function setupNavigation() {
@@ -246,6 +246,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             }
         }
     });
-
 });
-
