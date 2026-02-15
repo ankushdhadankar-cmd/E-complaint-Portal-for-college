@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://font.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <h2>E-Complaint for College - Admin</h2>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<div class="admin-wrapper">
+    <h3 class="admin-title">All Student Complaints</h3>
+    <div id="adminComplaintList" class="admin-grid"></div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    loadAdminComplaints();
+</script>
+
+</body>
+</html>
